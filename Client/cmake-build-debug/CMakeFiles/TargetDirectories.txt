@@ -1,0 +1,3 @@
+/Users/macbook/Desktop/Code/C++/MyRedis/Client/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/macbook/Desktop/Code/C++/MyRedis/Client/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/macbook/Desktop/Code/C++/MyRedis/Client/cmake-build-debug/CMakeFiles/Client.dir
