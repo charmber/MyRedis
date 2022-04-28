@@ -2,7 +2,8 @@
 #include "../Persistence/AOF.h"
 #include "../ParseChar/ParseString.h"
 
-std::unordered_map<std::string,std::string> RString;
+std::unordered_map<std::string,std::pair<std::string,long long>> RString;
+std::unordered_map<std::string,std::pair<std::string,long long>> RString1;
 
 
 
@@ -20,14 +21,14 @@ void ReSet(std::string str){
         close(connfd);
     }else{
         KeyType[key]="RString";         //设置全局key，内存淘汰
-        RString[key]=value;
+        RString[key].first=value;
         char buf[1024]="ok!\0";
         send(connfd,buf,strlen(buf),0);//发送响应
         close(connfd);
-        std::cout<<"SET: "<<key<<" success! value="<<RString[key]<<std::endl;
+        std::cout<<"SET: "<<key<<" success! value="<<RString[key].first<<std::endl;
 
         //持久化操作AOF
-        std::string tmp="SET "+key+" "+RString[key];
+        std::string tmp="SET "+key+" "+RString[key].first;
         AOF_Write(tmp);
     }
 }
@@ -50,7 +51,7 @@ void ReDel(std::string str){
                     send(connfd,buf, strlen(buf),0);
                     close(connfd);
                     //持久化操作AOF
-                    std::string tmp="DEL "+key+" "+RString[key];
+                    std::string tmp="DEL "+key+" "+RString[key].first;
                     AOF_Write(tmp);
                 } else{
                     std::string tmp="Key:"+key+" no find\0";
@@ -72,7 +73,7 @@ void ReDel(std::string str){
 void ReGet(std::string key){
     if(RString.find(key)!=RString.end()){
         char buf[1024]="";
-        StrChangeChar(RString[key],buf);
+        StrChangeChar(RString[key].first,buf);
         send(connfd,buf,1024,0);
         close(connfd);
         std::cout<<"GET:"<<key<<" success"<<std::endl;
@@ -84,14 +85,4 @@ void ReGet(std::string key){
         send(connfd,buf, 1024,0);
         close(connfd);
     }
-
 }
-
-
-
-
-
-
-
-
-

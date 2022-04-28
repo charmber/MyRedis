@@ -38,9 +38,3 @@ void CommOperate(std::string str,std::string comm){
         std::cout<<"未找到命令"<<std::endl;
     }
 }
-
-
-
-
-
-
