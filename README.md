@@ -6,14 +6,19 @@
     
 ---ParseChar
     ---解析命令以及字符串相关
+    
 ---Persistence
     ---持久化操作
+    
 ---public
     ---公共全局数据区域
+    
 ---ServerCommun
     ---通信服务
+    
 ---System
     ---获取系统参数相关
+    
 
 目前支持string以及set两种数据类型
 支持数据AOF持久化操作
